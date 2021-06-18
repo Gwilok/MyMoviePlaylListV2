@@ -3,8 +3,7 @@
     <v-app-bar dark app flat>
       <v-app-bar-nav-icon id="drawerIcon" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase white--text">
-        <span class="font-weight-light">vue</span>
-        <span>TV</span>
+        <span class="font-weight-light">myMoviesReview</span>
       </v-toolbar-title>
     </v-app-bar>
 

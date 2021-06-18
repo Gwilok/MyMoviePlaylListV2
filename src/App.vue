@@ -40,6 +40,7 @@ h1{
   margin:auto;
   font-size:25px;
     font-family: 'Teko-Bold';
+    text-align: center;
 }
 h2 {
   background-color:#0b488c;
@@ -81,12 +82,21 @@ nav.v-navigation-drawer {
     height: auto !important;
     border-radius:0 10px 50px 0;
 }
-
-
-
-
+.font-weight-light {
+    text-align: center;
+}
 header.v-sheet.v-sheet--tile.theme--dark.v-toolbar.v-toolbar--flat.v-app-bar.v-app-bar--fixed {
   left:0 !important;
+}
+
+.v-application .font-weight-light {
+    background-color: #020e1b;
+
+}
+
+/* centrage du tiire h1 */
+.v-application .ml-5 {
+    width: 100%;
 }
 /* 
 pagination */
@@ -112,5 +122,9 @@ pagination */
 }
 ::-webkit-scrollbar-track{
  background: #0b488c;
+}
+/* RESPONSIVE */
+.v-application .my-3 {
+    text-align: center;
 }
 </style>

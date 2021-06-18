@@ -1,7 +1,5 @@
 ## Project setup
-
-Use the package manager [yarn](https://yarnpkg.com/en/) to install VueTv.
-  
+ 
 ```
 yarn install
 ```

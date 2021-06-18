@@ -11,8 +11,8 @@
             {{movie.vote_average * 10}}
           </v-progress-circular> -->
           <v-progress-linear color="#0b488c" class="notation-horizontale" :value="movie.vote_average * 10">
-            Noté :&nbsp;<span style="color:#e4872c;">{{movie.vote_average * 10}}</span>&nbsp;
-            /100, pour &nbsp;<span style="color:#e4872c;">{{movie.vote_count}}</span>&nbsp;votant!
+            Noté :&nbsp;<span style="color:#e4872c">{{movie.vote_average * 10}}</span>&nbsp;
+            /100, pour &nbsp;<span style="color:#e4872c">{{movie.vote_count}}</span>&nbsp;votant!
           </v-progress-linear>
 
           <v-card-title class="font-weight-light">{{movie.title || movie.name}}</v-card-title>
@@ -72,6 +72,7 @@ div.v-card__title.font-weight-light {
     height: 30px !important;
     width:90%;
     border-radius:0 0 5px 5px;
+    font-size: 12px;
   }
 </style>
 

@@ -9,7 +9,10 @@
       <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>
     </div>
 
-    <media-grid :movies="shows" :imageURL="imageURL"></media-grid>    
+  <v-sheet color="#0b488c5e" class="pa-3">
+    <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
+    <media-grid :movies="shows" :imageURL="imageURL"></media-grid>
+  </v-sheet>  
 
     <div class="text-center" v-if="showPagination">
       <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>

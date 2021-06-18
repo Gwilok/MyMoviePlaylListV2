@@ -1,13 +1,14 @@
 <template>
   <v-layout justify-end row class="mt-3 mr-4">
     <v-flex class="ml-5" align-self-center>
-      <h1 class="display-1 font-weight-light">{{ pageTitle }}</h1><hr>
-      <p class="font-weight-light">{{ sortCriteria }}</p>
+      <h1 class="display-1 font-weight-light ">{{ pageTitle }}</h1><hr>
     </v-flex>
     <v-spacer></v-spacer>
 
     <v-flex align-self-center class="my-3">
-      <div class="text-sm-end">
+      <div class="text-sm-center">
+
+        <p class="font-weight-light">{{ sortCriteria }}</p>
 
         <v-tooltip  color="#e4872c" top>
           <template v-slot:activator="{ on }">
