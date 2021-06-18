@@ -1,15 +1,12 @@
 <template>
   <v-container>
-    <media-nav
-      :pageTitle="pageTitle"
-      :sortCriteria="sortCriteria"
-      @popularity="sortBy('popularity')"
-      @vote_average="sortBy('vote_average')"
-      @release_date="sortBy('release_date')"
-    ></media-nav>
+    <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
+      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
+      @vote_count="sortBy('vote_count')"></media-nav>
+      
     <media-grid :movies="shows" :imageURL="imageURL"></media-grid>
     <div class="text-center" v-if="showPagination">
-      <v-pagination color="primary" v-model="page" :length="3" :value="page"></v-pagination>
+      <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>
     </div>
   </v-container>
 </template>
@@ -27,9 +24,9 @@
     data: function() {
       return {
         shows: [],
-        pageTitle: "Top Rated Shows",
+        pageTitle: "Liste des Séries les mieux notées",
         imageURL: "https://image.tmdb.org/t/p/w1280",
-        sortCriteria: "Most Popular",
+        sortCriteria: "Triés par : les plus populaires",
         sortedBy: "popularity",
         page: 1,
         showPagination: false
@@ -39,7 +36,8 @@
       init() {
         const key ="ad3aba60a11eb6e43170e9c6ec0d00e6";
         axios
-          .get("https://api.themoviedb.org/3/tv/top_rated?api_key="+key+"&language=en-US&page="+this.page
+          .get("https://api.themoviedb.org/3/tv/top_rated?api_key="+key+
+          "&language=en-US&page="+this.page
           )
           .then(response => {
             // handle success
@@ -66,6 +64,8 @@
           //release_date for shows is called first_air_date
           prop = "first_air_date";
           this.sortCriteria = "Triés par : sorties les plus récentes";
+        } else if (prop === "vote_count") {
+        this.sortCriteria = "Triés par : le plus grand nombre de vote";
         }
         this.sortedBy = prop;
         this.shows.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));

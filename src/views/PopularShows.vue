@@ -2,12 +2,12 @@
   <v-container>
 
     <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
-      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')"></media-nav>
+      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
+      @vote_count="sortBy('vote_count')"></media-nav>
 
     <media-grid :movies="shows" :imageURL="imageURL"></media-grid>
-
     <div class="text-center" v-if="showPagination">
-      <v-pagination color="#e4872c" v-model="page" :length="10" :value="page"></v-pagination>
+      <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>
     </div>
 
   </v-container>
@@ -26,9 +26,9 @@
     data: function() {
       return {
         shows: [],
-        pageTitle: "Popular Shows",
+        pageTitle: "Liste des Séries les plus poulaires",
         imageURL: "https://image.tmdb.org/t/p/w1280",
-        sortCriteria: "Most Popular",
+        sortCriteria: "Triés par : les plus populaires",
         sortedBy: "popularity",
         page: 1,
         showPagination: false
@@ -57,13 +57,15 @@
       sortBy(prop) {
         console.log(prop);
         if (prop === "popularity") {
-          this.sortCriteria = "Most Popular";
+          this.sortCriteria = "Triés par : les plus populaires";
         } else if (prop === "vote_average") {
-          this.sortCriteria = "Highest Rated";
+          this.sortCriteria = "Triés par : les mieux notés";
         } else if (prop === "release_date") {
           //release_date for shows is called first_air_date
           prop = "first_air_date";
-          this.sortCriteria = "Release Date";
+          this.sortCriteria = "Triés par : sorties les plus récentes";
+        } else if (prop === "vote_count") {
+        this.sortCriteria = "Triés par : le plus grand nombre de vote";
         }
         this.sortedBy = prop;
         this.shows.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));

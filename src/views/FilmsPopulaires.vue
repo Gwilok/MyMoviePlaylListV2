@@ -2,12 +2,12 @@
   <v-container>
 
     <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
-      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')"></media-nav>
+      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
+      @vote_count="sortBy('vote_count')"></media-nav>
 
     <media-grid :movies="movies" :imageURL="imageURL"></media-grid>
-
     <div class="text-center" v-if="showPagination">
-      <v-pagination color="primary" v-model="page" :length="3" :value="page"></v-pagination>
+      <v-pagination color="#e4872c" v-model="page" :length="441" :value="page"></v-pagination>
     </div>
 
   </v-container>
@@ -26,9 +26,9 @@ export default {
   data: function () {
     return {
       movies: [],
-      pageTitle: "Les Films Populaires",
+      pageTitle: "Liste des Films les plus Populaires",
       imageURL: "https://image.tmdb.org/t/p/w1280",
-      sortCriteria: "Most Popular",
+      sortCriteria: "Triés par : les plus populaires",
       sortedBy: "popularity",
       page: 1,
       showPagination: false,
@@ -48,12 +48,14 @@ export default {
         });
     },
     sortBy(prop) {
-      if (prop === "popularity") {
-        this.sortCriteria = "Most Popular";
+            if (prop === "popularity") {
+        this.sortCriteria = "Triés par : les plus populaires";
       } else if (prop === "vote_average") {
-        this.sortCriteria = "Highest Rated";
+        this.sortCriteria = "Triés par : les mieux notés";
       } else if (prop === "release_date") {
-        this.sortCriteria = "Release Date";
+        this.sortCriteria = "Triés par : sorties les plus récentes";
+      } else if (prop === "vote_count") {
+        this.sortCriteria = "Triés par : le plus grand nombre de vote";
       }
       this.sortedBy = prop;
       this.movies.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));

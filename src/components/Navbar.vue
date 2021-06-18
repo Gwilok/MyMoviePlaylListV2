@@ -8,7 +8,7 @@
       </v-toolbar-title>
     </v-app-bar>
 
-    <v-navigation-drawer app v-model="drawer" color="indigo accent-2">
+    <v-navigation-drawer app v-model="drawer" color="accent-2">
       <v-layout column align-center>
         <v-flex class="my-5">
           <v-img max-width="100px" src="../assets/retro-tv.svg"></v-img>
@@ -38,22 +38,22 @@
           { icon: "mdi-home", text: "Home", route: "/" },
           {
             icon: "mdi-filmstrip",
-            text: "Films populaires",
+            text: "Films Populaires",
             route: "/films-populaires"
           },
           {
             icon: "mdi-trophy",
-            text: "Top Rated Movies",
+            text: "Films les mieux Notés",
             route: "/top-rated-movies"
           },
           {
             icon: "mdi-television-classic",
-            text: "Popular Shows",
+            text: "Séries Populaires",
             route: "/popular-shows"
           },
           {
             icon: "mdi-medal",
-            text: "Top Rated Shows",
+            text: "Séries les mieux notées",
             route: "/top-rated-shows"
           },
           {

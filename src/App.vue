@@ -85,9 +85,11 @@ nav.v-navigation-drawer {
 
 
 
-
-
-
+header.v-sheet.v-sheet--tile.theme--dark.v-toolbar.v-toolbar--flat.v-app-bar.v-app-bar--fixed {
+  left:0 !important;
+}
+/* 
+pagination */
   .theme--dark.v-pagination button.v-pagination__item {
       background: #0b488c;
       font-size: 20px;

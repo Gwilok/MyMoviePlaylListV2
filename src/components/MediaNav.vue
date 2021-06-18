@@ -8,34 +8,51 @@
 
     <v-flex align-self-center class="my-3">
       <div class="text-sm-end">
-        <v-tooltip top>
+
+        <v-tooltip  color="#e4872c" top>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" small color="primary" class="criteriaSelector mx-3 mt-3" @click="sortBy('popularity')">
-              <v-icon left>mdi-account-heart</v-icon>
+            <v-btn v-on="on" small color="#e4872c" class="criteriaSelector mx-3 mt-3"
+             @click="sortBy('popularity')">
+              <v-icon left>mdi-heart</v-icon>
               <span class="caption">Par popularité</span>
             </v-btn>
           </template>
-          <span>Trier les films par popularité</span>
+          <span><v-icon left>mdi-information-outline</v-icon>Trier les films par popularité</span>
         </v-tooltip>
 
-        <v-tooltip top>
+        <v-tooltip  color="#e4872c" top>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" small color="primary" class="criteriaSelector mx-3 mt-3" @click="sortBy('vote_average')">
+            <v-btn v-on="on" small color="#e4872c"  class="criteriaSelector mx-3 mt-3"
+             @click="sortBy('vote_count')">
+              <v-icon left>mdi-account-heart</v-icon>
+              <span class="caption">Par Nombre de Vote</span>
+            </v-btn>
+          </template>
+          <span><v-icon left>mdi-information-outline</v-icon>Trier les films par nombres de votes</span>
+        </v-tooltip>
+
+        <v-tooltip  color="#e4872c" top>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" small color="#e4872c"  class="criteriaSelector mx-3 mt-3"
+             @click="sortBy('vote_average')">
               <v-icon left>mdi-star</v-icon>
               <span class="caption">Par Notation</span>
             </v-btn>
           </template>
-          <span>Trier les films par notation</span>
+          <span><v-icon left>mdi-information-outline</v-icon>Trier les films par notation</span>
         </v-tooltip>
-        <v-tooltip top>
+
+        <v-tooltip  color="#e4872c" top>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on" small color="primary" class="criteriaSelector mx-3 mt-3" @click="sortBy('release_date')">
+            <v-btn v-on="on" small color="#e4872c" class="criteriaSelector mx-3 mt-3"
+             @click="sortBy('release_date')">
               <v-icon left>mdi-calendar</v-icon>
               <span class="caption">Par Date de Sortie</span>
             </v-btn>
           </template>
-          <span>Trier les films par date de Sortie</span>
+          <span><v-icon left>mdi-information-outline</v-icon>Trier les films par date de Sortie</span>
         </v-tooltip>
+
       </div>
     </v-flex>
   </v-layout>
@@ -55,4 +72,7 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
