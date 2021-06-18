@@ -1,4 +1,4 @@
-## Project setup
+## C'est pas compliqué
  
 ```
 yarn install
