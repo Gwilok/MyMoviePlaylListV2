@@ -1,14 +1,21 @@
 <template>
   <v-container>
+
     <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
       @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
       @vote_count="sortBy('vote_count')"></media-nav>
       
+    <div class="text-center" v-if="showPagination">
+      <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>
+    </div>
+      
     <media-grid :movies="shows" :imageURL="imageURL"></media-grid>
+
     <div class="text-center" v-if="showPagination">
       <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>
     </div>
   </v-container>
+
 </template>
 
 <script>

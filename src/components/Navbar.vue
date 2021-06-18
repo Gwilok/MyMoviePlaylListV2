@@ -35,7 +35,7 @@
       return {
         drawer: false,
         links: [
-          { icon: "mdi-home", text: "Home", route: "/" },
+          { icon: "mdi-home", text: "Accueil", route: "/" },
           {
             icon: "mdi-filmstrip",
             text: "Films Populaires",
@@ -44,17 +44,17 @@
           {
             icon: "mdi-trophy",
             text: "Films les mieux Notés",
-            route: "/top-rated-movies"
+            route: "/films-mieux-notes"
           },
           {
             icon: "mdi-television-classic",
             text: "Séries Populaires",
-            route: "/popular-shows"
+            route: "/series-populaires"
           },
           {
             icon: "mdi-medal",
             text: "Séries les mieux notées",
-            route: "/top-rated-shows"
+            route: "/series-mieux-notees"
           },
           {
             icon: "mdi-information",

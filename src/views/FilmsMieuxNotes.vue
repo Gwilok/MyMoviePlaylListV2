@@ -5,11 +5,15 @@
       @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
       @vote_count="sortBy('vote_count')"></media-nav>
 
-    <media-grid :movies="shows" :imageURL="imageURL"></media-grid>
     <div class="text-center" v-if="showPagination">
-      <v-pagination color="#e4872c" v-model="page" :length="94" :value="page"></v-pagination>
+      <v-pagination color="#e4872c" v-model="page" :length="441" :value="page"></v-pagination>
     </div>
 
+    <media-grid :movies="movies" :imageURL="imageURL"></media-grid>
+
+    <div class="text-center" v-if="showPagination">
+      <v-pagination color="#e4872c" v-model="page" :length="441" :value="page"></v-pagination>
+    </div>
   </v-container>
 </template>
 
@@ -23,12 +27,12 @@
       mediaGrid: MediaGrid,
       mediaNav: MediaNav
     },
-    data: function() {
+    data() {
       return {
-        shows: [],
-        pageTitle: "Liste des Séries les plus poulaires",
+        movies: [],
         imageURL: "https://image.tmdb.org/t/p/w1280",
         sortCriteria: "Triés par : les plus populaires",
+        pageTitle: "Liste des Films les mieux notés",
         sortedBy: "popularity",
         page: 1,
         showPagination: false
@@ -38,11 +42,14 @@
       init() {
         const key = "ad3aba60a11eb6e43170e9c6ec0d00e6";
         axios
-          .get("https://api.themoviedb.org/3/tv/popular?api_key="+key+"&language=fr-FR&page="+this.page)
+          .get(
+            "https://api.themoviedb.org/3/movie/top_rated?api_key="
+            +key+"&language=en-US&page="+this.page
+          )
           .then(response => {
             // handle success
             //console.log(response);
-            this.shows = response.data.results;
+            this.movies = response.data.results;
           })
           .catch(error => {
             // handle error
@@ -54,23 +61,20 @@
             this.showPagination = true;
           });
       },
-      sortBy(prop) {
-        console.log(prop);
-        if (prop === "popularity") {
-          this.sortCriteria = "Triés par : les plus populaires";
-        } else if (prop === "vote_average") {
-          this.sortCriteria = "Triés par : les mieux notés";
-        } else if (prop === "release_date") {
-          //release_date for shows is called first_air_date
-          prop = "first_air_date";
-          this.sortCriteria = "Triés par : sorties les plus récentes";
-        } else if (prop === "vote_count") {
+    sortBy(prop) {
+            if (prop === "popularity") {
+        this.sortCriteria = "Triés par : les plus populaires";
+      } else if (prop === "vote_average") {
+        this.sortCriteria = "Triés par : les mieux notés";
+      } else if (prop === "release_date") {
+        this.sortCriteria = "Triés par : sorties les plus récentes";
+      } else if (prop === "vote_count") {
         this.sortCriteria = "Triés par : le plus grand nombre de vote";
-        }
-        this.sortedBy = prop;
-        this.shows.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));
       }
+      this.sortedBy = prop;
+      this.movies.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));
     },
+  },
     watch: {
       page: function(page) {
         this.init();
