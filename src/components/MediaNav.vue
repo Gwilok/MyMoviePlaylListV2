@@ -3,8 +3,6 @@
     <v-flex class="ml-5" align-self-center>
       <h1 class="display-1 font-weight-light ">{{ pageTitle }}</h1><hr>
     </v-flex>
-    <v-spacer></v-spacer>
-
     <v-flex align-self-center class="my-3">
       <div class="text-sm-center">
 

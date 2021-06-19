@@ -26,10 +26,9 @@
 </script>
 
 <style>
-
 .v-toolbar__title{
 color: white;
-  font-family: 'Teko-Bold';
+font-family: 'Teko', sans-serif;
 }
 h1{
   color: #e4872c;
@@ -39,13 +38,13 @@ h1{
   width:80%;
   margin:auto;
   font-size:25px;
-    font-family: 'Teko-Bold';
+  font-family: 'Teko', sans-serif;
     text-align: center;
 }
 h2 {
   background-color:#0b488c;
   color:white;
-  font-family: 'Teko-Bold';
+  font-family: 'Teko', sans-serif;
   padding:10px 0 5px 0;
   font-size:30px;
 }

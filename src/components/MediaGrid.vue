@@ -10,9 +10,8 @@
           :value="movie.vote_average * 10" class="font-weight-heavy my-5">
             {{movie.vote_average * 10}}
           </v-progress-circular> -->
-          <v-progress-linear color="#0b488c" class="notation-horizontale" :value="movie.vote_average * 10">
-            Noté :&nbsp;<span style="color:#e4872c">{{movie.vote_average * 10}}</span>&nbsp;
-            /100, pour &nbsp;<span style="color:#e4872c">{{movie.vote_count}}</span>&nbsp;votant!
+          <v-progress-linear color="#0b488c" class="notation-horizontale" :value="movie.vote_average * 10"> Noté :&nbsp;<span style="color:#e4872c">
+            {{movie.vote_average * 10}}</span>&nbsp;/100, pour &nbsp;<span style="color:#e4872c">{{movie.vote_count}}</span>&nbsp;votant!
           </v-progress-linear>
 
           <v-card-title class="font-weight-light">{{movie.title || movie.name}}</v-card-title>
@@ -20,14 +19,41 @@
           <v-card-text>
             <v-expansion-panels focusable>
               <v-expansion-panel id="synopsis">
-                <v-expansion-panel-header>Informations supplémentaires</v-expansion-panel-header>
-                <v-expansion-panel-content><b>Synopsis : </b>{{movie.overview}}</v-expansion-panel-content>
-                <v-expansion-panel-content>{{movie.adult}}</v-expansion-panel-content>
-                <v-expansion-panel-content>{{movie.original_language}}</v-expansion-panel-content>
-                <v-expansion-panel-content>{{movie.original_title}}</v-expansion-panel-content>
-                <v-expansion-panel-content>{{movie.popularity}}</v-expansion-panel-content>
-                <v-expansion-panel-content><b>Date de sortie : </b>{{movie.release_date}}</v-expansion-panel-content>
-                <v-img :src="imageURL + movie.backdrop_path"></v-img>
+                <v-expansion-panel-header>Infos suppémentaires</v-expansion-panel-header>
+
+                <v-expansion-panel-content v-if="movie.media_type=='tv'"><b>Type : </b>Série télévisé</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.media_type=='movie'"><b>Type : </b>Film</v-expansion-panel-content>
+
+                <v-expansion-panel-content v-if="movie.adult==false">
+                  <v-icon color="green" left>mdi-checkbox-marked-circle</v-icon>Contenu adapté aux enfants
+                </v-expansion-panel-content>                
+                <v-expansion-panel-content v-else>
+                  <v-icon color="red" left>mdi-close-circle</v-icon>Contenu pour adultes
+                </v-expansion-panel-content>
+
+                <v-expansion-panel-content v-if="movie.overview"><b>Synopsis : </b>{{movie.overview}}</v-expansion-panel-content>
+
+                <!-- <v-expansion-panel-content>{{movie.original_language}}</v-expansion-panel-content> -->
+                <v-expansion-panel-content v-if="movie.original_language=='en'"><b>VO : </b>Anglaise</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='fr'"><b>VO : </b>Française</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='nl'"><b>VO : </b>Néherlandaise</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='es'"><b>VO : </b>Espagnole</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='ja'"><b>VO : </b>Japonaise</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='de'"><b>VO : </b>Allemande</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='it'"><b>VO : </b>Italienne</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='pt'"><b>VO : </b>Portuguaise</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='sv'"><b>VO : </b>Suédoise</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='zh'"><b>VO : </b>Chinoise(Mandarin)</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.original_language=='ko'"><b>VO : </b>Coréenne</v-expansion-panel-content>
+
+                <v-expansion-panel-content v-if="movie.original_title"><b>Titre original : </b>{{movie.original_title}}</v-expansion-panel-content>
+
+                <v-expansion-panel-content v-if="movie.popularity"><b>Popularité : </b>{{movie.popularity}} personnes aiment!</v-expansion-panel-content>
+
+                <v-expansion-panel-content v-if="movie.release_date"><b>Date de sortie : </b>{{movie.release_date}}</v-expansion-panel-content>
+
+                <v-img :src="imageURL+movie.backdrop_path"></v-img>
+
               </v-expansion-panel>
             </v-expansion-panels>
           </v-card-text>
@@ -48,6 +74,9 @@
 </script>
 
 <style scoped>
+b {
+  color: #05213f;
+}
 div.theme--dark.v-card {
     background-color: #05213f;
     color: #fff;

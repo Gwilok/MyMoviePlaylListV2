@@ -1,25 +1,93 @@
 <template>
   <v-container id="accueil">
-    <v-layout align-center justify-space-around column fill-height wrap class="my-5 text-center">
+    
       <h1 class="display-3 my-3 my-5">Accueil</h1>
         <p>Ce site contient plus de <b>8820 Films</b> et <b>1880 Séries</b>!</p>
+      <v-text-field v-model="motCherche" color="#e4872c" label="Chercher" placeholder="Film, Series, Artistes ..." outlined></v-text-field>
 
-      <v-img contain width="50vw" height="50vh" src="../assets/undraw_horror_movie.svg"></v-img>
+         <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
+      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
+      @vote_count="sortBy('vote_count')"></media-nav>
 
-      <v-btn min-width="200" class="my-5" router to="/films-populaires">Films Populaires</v-btn>
-    </v-layout>
+    <div class="text-center" v-if="showPagination">
+      <v-pagination color="#e4872c" v-model="page" :length="20" :value="page"></v-pagination>
+    </div>
+
+  <v-sheet color="#0b488c5e" class="pa-3">
+    <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
+    <media-grid :movies="movies" :imageURL="imageURL"></media-grid>
+  </v-sheet>
+
+    <div class="text-center" v-if="showPagination">
+      <v-pagination color="#e4872c" v-model="page" :length="20" :value="page"></v-pagination>
+    </div>
+   
   </v-container>
 </template>
 
 <script>
-  export default {
-    components: {},
-    data() {
-      return {};
-    }
-  };
+import axios from "axios";
+import MediaGrid from "../components/MediaGrid.vue";
+import MediaNav from "../components/MediaNav.vue";
+
+export default {
+  components: {
+    mediaGrid: MediaGrid,
+    mediaNav: MediaNav,
+  },
+  data: function () {
+    return {
+      movies: [],
+      pageTitle: "Liste des Films les plus Populaires",
+      imageURL: "https://image.tmdb.org/t/p/w1280",
+      sortCriteria: "Triés par : les plus populaires",
+      sortedBy: "popularity",
+      page: 1,
+      showPagination: false,
+      motCherche:"punisher",
+    };
+  },
+  methods: {
+    init() {
+      const key = "ad3aba60a11eb6e43170e9c6ec0d00e6";
+      axios
+        .get("https://api.themoviedb.org/3/search/multi?api_key="
+        +key+"&language=fr-FR&query="+this.motCherche+"&page="+this.page+"&include_adult=true")
+        .then((response) => { this.movies = response.data.results;})
+        .catch((error) => { console.log(error);})
+        .finally(() => {
+          this.sortBy(this.sortedBy);
+          this.showPagination = true;
+        });
+    },
+    sortBy(prop) {
+            if (prop === "popularity") {
+        this.sortCriteria = "Triés par : les plus populaires";
+      } else if (prop === "vote_average") {
+        this.sortCriteria = "Triés par : les mieux notés";
+      } else if (prop === "release_date") {
+        this.sortCriteria = "Triés par : sorties les plus récentes";
+      } else if (prop === "vote_count") {
+        this.sortCriteria = "Triés par : le plus grand nombre de vote";
+      }
+      this.sortedBy = prop;
+      this.movies.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));
+    },
+  },
+  watch: {
+    page: function (page) {
+      this.init();
+    },
+  },
+  mounted() {
+    this.init();
+  },
+  inject: {
+      theme: {
+        default: { isDark: false },
+      },
+    },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
