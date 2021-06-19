@@ -1,5 +1,4 @@
-## C'est pas compliqué
- 
+
 ```
 yarn install
 ```
