@@ -1,29 +1,41 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12 sm6 md4 lg3 v-for="movie in movies" :key="movie.id">
+
+      <!-- DEBUT MEDIAS -->
       <v-card hover class="ma-3" min-height="500">
         <v-layout column align-center fill-height class="text-center">
 
+          <!-- IMAGE D'ENTETE -->
           <v-img :src="imageURL + movie.poster_path"></v-img>
+          <v-img :src="imageURL + movie.profile_path"></v-img>
 
-          <!-- <v-progress-circular size="90" color="white" rotate="-90" width="8" 
-          :value="movie.vote_average * 10" class="font-weight-heavy my-5">
-            {{movie.vote_average * 10}}
-          </v-progress-circular> -->
+          <!-- NOTE ET NOMBRE DE VOTE -->
           <v-progress-linear color="#0b488c" class="notation-horizontale" :value="movie.vote_average * 10"> Noté :&nbsp;<span style="color:#e4872c">
             {{movie.vote_average * 10}}</span>&nbsp;/100, pour &nbsp;<span style="color:#e4872c">{{movie.vote_count}}</span>&nbsp;votant!
           </v-progress-linear>
 
+          <!-- TITRE OU NOM DU MEDIA -->
           <v-card-title class="font-weight-light">{{movie.title || movie.name}}</v-card-title>
           
+          <!-- BOUTONS INFOS SUPPLEMENTAIRES ET INFOS EN EXPANSION PANEL -->
           <v-card-text>
             <v-expansion-panels focusable>
               <v-expansion-panel id="synopsis">
+                <!-- BOUTONS OUVERTURE -->
                 <v-expansion-panel-header>Infos suppémentaires</v-expansion-panel-header>
 
+                <!-- TYPE DE MEDIA -->
                 <v-expansion-panel-content v-if="movie.media_type=='tv'"><b>Type : </b>Série télévisé</v-expansion-panel-content>
                 <v-expansion-panel-content v-if="movie.media_type=='movie'"><b>Type : </b>Film</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.media_type=='person'"><b>Type : </b>Artiste</v-expansion-panel-content>
 
+                <!-- PRECISION, Et FRANCISATION POUR ROLE CONNU DE ARTISTE -->
+                <v-expansion-panel-content v-if="movie.known_for_department=='Acting'"><b>Rôle le plus connu : </b>Acteur</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.known_for_department=='Sound'"><b>Rôle le plus connu : </b>Ingénieur du Son</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.known_for_department=='Realisation'"><b>Rôle le plus connu : </b>Réalisation</v-expansion-panel-content>
+
+                <!-- ADULTE TRUE or FALSE + MESSAGE -->
                 <v-expansion-panel-content v-if="movie.adult==false">
                   <v-icon color="green" left>mdi-checkbox-marked-circle</v-icon>Contenu adapté aux enfants
                 </v-expansion-panel-content>                
@@ -31,8 +43,10 @@
                   <v-icon color="red" left>mdi-close-circle</v-icon>Contenu pour adultes
                 </v-expansion-panel-content>
 
+                <!-- SYNOPSIS DE MEDIA -->
                 <v-expansion-panel-content v-if="movie.overview"><b>Synopsis : </b>{{movie.overview}}</v-expansion-panel-content>
 
+                <!-- AFFICHAGE EN FONCTION DE LA LANGUE VO -->
                 <!-- <v-expansion-panel-content>{{movie.original_language}}</v-expansion-panel-content> -->
                 <v-expansion-panel-content v-if="movie.original_language=='en'"><b>VO : </b>Anglaise</v-expansion-panel-content>
                 <v-expansion-panel-content v-if="movie.original_language=='fr'"><b>VO : </b>Française</v-expansion-panel-content>
@@ -46,12 +60,16 @@
                 <v-expansion-panel-content v-if="movie.original_language=='zh'"><b>VO : </b>Chinoise(Mandarin)</v-expansion-panel-content>
                 <v-expansion-panel-content v-if="movie.original_language=='ko'"><b>VO : </b>Coréenne</v-expansion-panel-content>
 
+                <!-- TITRE ORIGINAL DU MEDIA -->
                 <v-expansion-panel-content v-if="movie.original_title"><b>Titre original : </b>{{movie.original_title}}</v-expansion-panel-content>
-
+                
+                <!-- NOMBRE DE PERSONNES QUI AIMENT -->
                 <v-expansion-panel-content v-if="movie.popularity"><b>Popularité : </b>{{movie.popularity}} personnes aiment!</v-expansion-panel-content>
 
+                <!-- DATE DE SORTIE DU MEDIA -->
                 <v-expansion-panel-content v-if="movie.release_date"><b>Date de sortie : </b>{{movie.release_date}}</v-expansion-panel-content>
 
+                <!-- IMAGE POSTER SUR BOUTON INFO -->
                 <v-img :src="imageURL+movie.backdrop_path"></v-img>
 
               </v-expansion-panel>

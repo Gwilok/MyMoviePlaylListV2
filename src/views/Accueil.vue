@@ -4,11 +4,6 @@
     <!-- INFOS -->
     <h1 class="display-3 my-3 my-5">Accueil</h1>
     <p>Ce site contient plus de <b>8820 Films</b> et <b>1880 Séries</b>!</p>
-
-    <!-- BOUTONS TYPE DE TRI DES FILMS -->
-    <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
-    @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
-    @vote_count="sortBy('vote_count')"></media-nav>
       
     <!-- CHAMP ET BOUTON RECHERCHE PAR MOT CLE -->
     <v-text-field style="width:30%; margin:auto;" hint="Merci de confirmer votre recherche." filled v-model="motCherche" color="#e4872c"
@@ -16,6 +11,11 @@
     <v-btn small color="#e4872c" class=" mx-3 mt-3" @click=" init()">
       <div class="caption">CONFIRMER LA RECHERCHE</div>
     </v-btn>
+
+    <!-- BOUTONS TYPE DE TRI DES FILMS -->
+    <media-nav  v-if="motCherche" :pageTitle="pageTitle" :sortCriteria="sortCriteria"
+     @popularity="sortBy('popularity')" @vote_average="sortBy('vote_average')"
+     @release_date="sortBy('release_date')" @vote_count="sortBy('vote_count')"></media-nav>
 
     <!-- PAGINATION DEBUT DE PAGE -->
     <div v-if="motCherche" class="text-center"><!-- anciennement v-if showPagination -->
