@@ -1,24 +1,35 @@
 <template>
   <v-container id="accueil">
     
-      <h1 class="display-3 my-3 my-5">Accueil</h1>
-        <p>Ce site contient plus de <b>8820 Films</b> et <b>1880 Séries</b>!</p>
-      <v-text-field v-model="motCherche" color="#e4872c" label="Chercher" placeholder="Film, Series, Artistes ..." outlined></v-text-field>
+    <!-- INFOS -->
+    <h1 class="display-3 my-3 my-5">Accueil</h1>
+    <p>Ce site contient plus de <b>8820 Films</b> et <b>1880 Séries</b>!</p>
 
-         <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
-      @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
-      @vote_count="sortBy('vote_count')"></media-nav>
+    <!-- BOUTONS TYPE DE TRI DES FILMS -->
+    <media-nav :pageTitle="pageTitle" :sortCriteria="sortCriteria" @popularity="sortBy('popularity')"
+    @vote_average="sortBy('vote_average')" @release_date="sortBy('release_date')" 
+    @vote_count="sortBy('vote_count')"></media-nav>
+      
+    <!-- CHAMP ET BOUTON RECHERCHE PAR MOT CLE -->
+    <v-text-field style="width:30%; margin:auto;" hint="Merci de confirmer votre recherche." filled v-model="motCherche" color="#e4872c"
+      label="Chercher" placeholder="Film, Series, Artistes ..." outlined></v-text-field>
+    <v-btn small color="#e4872c" class=" mx-3 mt-3" @click=" init()">
+      <div class="caption">CONFIRMER LA RECHERCHE</div>
+    </v-btn>
 
-    <div class="text-center" v-if="showPagination">
+    <!-- PAGINATION DEBUT DE PAGE -->
+    <div v-if="motCherche" class="text-center"><!-- anciennement v-if showPagination -->
       <v-pagination color="#e4872c" v-model="page" :length="20" :value="page"></v-pagination>
     </div>
 
-  <v-sheet color="#0b488c5e" class="pa-3">
-    <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
-    <media-grid :movies="movies" :imageURL="imageURL"></media-grid>
-  </v-sheet>
+    <!-- AFFICHAGE DES FILMS AVEC LOADER -->
+    <v-sheet v-if="motCherche" color="#0b488c5e" class="pa-3">
+      <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
+      <media-grid :movies="movies" :imageURL="imageURL"></media-grid>
+    </v-sheet>
 
-    <div class="text-center" v-if="showPagination">
+    <!-- PAGINATION FIN DE PAGE -->
+    <div v-if="motCherche" class="text-center"><!-- anciennement v-if showPagination -->
       <v-pagination color="#e4872c" v-model="page" :length="20" :value="page"></v-pagination>
     </div>
    
@@ -38,13 +49,13 @@ export default {
   data: function () {
     return {
       movies: [],
-      pageTitle: "Liste des Films les plus Populaires",
+      pageTitle: "Rechercher par mot-clé :",
       imageURL: "https://image.tmdb.org/t/p/w1280",
       sortCriteria: "Triés par : les plus populaires",
       sortedBy: "popularity",
       page: 1,
       showPagination: false,
-      motCherche:"punisher",
+      motCherche:"",
     };
   },
   methods: {
@@ -90,4 +101,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#accueil {
+  text-align: center;
+}
+
+</style>
