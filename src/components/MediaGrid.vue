@@ -31,9 +31,18 @@
                 <v-expansion-panel-content v-if="movie.media_type=='person'"><b>Type : </b>Artiste</v-expansion-panel-content>
 
                 <!-- PRECISION, Et FRANCISATION POUR ROLE CONNU DE ARTISTE -->
-                <v-expansion-panel-content v-if="movie.known_for_department=='Acting'"><b>Rôle le plus connu : </b>Acteur</v-expansion-panel-content>
-                <v-expansion-panel-content v-if="movie.known_for_department=='Sound'"><b>Rôle le plus connu : </b>Ingénieur du Son</v-expansion-panel-content>
-                <v-expansion-panel-content v-if="movie.known_for_department=='Realisation'"><b>Rôle le plus connu : </b>Réalisation</v-expansion-panel-content>
+                <v-expansion-panel-content v-if="movie.media_type=='person' && movie.known_for_department=='Acting'">
+                  <b>Rôle le plus connu : </b>Acteur</v-expansion-panel-content>
+                <v-expansion-panel-content v-else-if="movie.media_type=='person' && movie.known_for_department=='Sound'">
+                  <b>Rôle le plus connu : </b>Ingénieur du Son</v-expansion-panel-content>
+                <v-expansion-panel-content v-else-if="movie.media_type=='person' && movie.known_for_department=='Production'">
+                  <b>Rôle le plus connu : </b>Production</v-expansion-panel-content>
+                <v-expansion-panel-content v-else-if="movie.media_type=='person' && movie.known_for_department=='Directing'">
+                  <b>Rôle le plus connu : </b>Direction</v-expansion-panel-content>
+                <v-expansion-panel-content v-else-if="movie.media_type=='person' && movie.known_for_department=='Costume & Make-Up'">
+                  <b>Rôle le plus connu : </b>Costumes/Maquillages</v-expansion-panel-content>
+                
+                <v-expansion-panel-content v-else><b>Rôle le plus connu : </b>{{movie.known_for_department}}</v-expansion-panel-content>
 
                 <!-- ADULTE TRUE or FALSE + MESSAGE -->
                 <v-expansion-panel-content v-if="movie.adult==false">
@@ -98,6 +107,7 @@ b {
 div.theme--dark.v-card {
     background-color: #05213f;
     color: #fff;
+    min-height:auto !important;
 }
 div.v-card__title.font-weight-light {
   background-color: #05213f;
