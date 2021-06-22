@@ -50,7 +50,7 @@ export default {
     return {
       movies: [],
       pageTitle: "Rechercher par mot-clé :",
-      imageURL: "https://image.tmdb.org/t/p/w1280",
+      imageURL: "https://image.tmdb.org/t/p/original",
       sortCriteria: "Triés par : les plus populaires",
       sortedBy: "popularity",
       page: 1,

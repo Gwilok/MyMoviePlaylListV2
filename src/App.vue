@@ -26,6 +26,10 @@
 </script>
 
 <style>
+body div#app{
+font-family: 'Teko', sans-serif !important;
+font-size:1.6rem;
+}
 .v-toolbar__title{
 color: white;
 font-family: 'Teko', sans-serif;
