@@ -5,7 +5,9 @@ import FilmsPopulaires from './views/FilmsPopulaires.vue'
 import FilmsMieuxNotes from './views/FilmsMieuxNotes.vue';
 import SeriesPopulaires from './views/SeriesPopulaires.vue'
 import SeriesMieuxNotees from './views/SeriesMieuxNotees.vue'
+import ListePays from './views/ListePays.vue'
 import MaListe from './views/MaListe.vue'
+import CountryDetail from './components/CountryDetail'
 
 Vue.use(Router)
 
@@ -42,6 +44,20 @@ export default new Router({
       path: '/maListe',
       name: 'maListe',
       component: MaListe
-    }
+    },
+    {
+      path: '/liste-des-pays',
+      name: 'listePays',
+      component: ListePays
+    },
+    {
+      path: '/:country',
+      name: 'country-detail',
+      component: CountryDetail,
+      props: true,
+      meta: {
+        title: 'REST API Countries App'
+      }
+    },
   ]
 })

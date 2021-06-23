@@ -1,4 +1,5 @@
 <template>
+<div id="app" :class="{ darkApp : isDarkTheme }">
   <v-app>
     <app-navbar></app-navbar>
     <v-content>
@@ -8,6 +9,8 @@
       <app-footer></app-footer>
     </v-footer>
   </v-app>
+</div>
+
 </template>
 
 <script>
@@ -19,16 +22,26 @@
       appNavbar: Navbar,
       appFooter: Footer
     },
-    data: () => ({
-      //
-    })
+    data () {
+    return {
+      isDarkTheme: false,
+    }
+  },
+  watch: {
+    '$route': {
+      handler: (to) => {
+        document.title = to.meta.title || '';
+      },
+      immediate: true
+    }
+  }
   };
 </script>
 
 <style>
 body div#app{
 font-family: 'Teko', sans-serif !important;
-font-size:1.6rem;
+font-size:1.8rem;
 }
 .v-toolbar__title{
 color: white;

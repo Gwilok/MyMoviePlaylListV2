@@ -89,6 +89,7 @@
 
             </v-expansion-panel>
           </v-expansion-panels>
+          <button class="btn-add-modal"  @click="addListeFavoris(movie)">Ajout de la tâche</button>
         </v-card-text>
 
       </v-layout>
