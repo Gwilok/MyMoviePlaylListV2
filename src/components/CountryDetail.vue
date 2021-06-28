@@ -1,5 +1,5 @@
 <template>
-  <div class="country-detail" :class="{ darkTheme : isDarkTheme }">
+  <div class="country-detail">
     <a @click="$router.go(-1)" class="backBtn"><i class="fas fa-arrow-left" /> Retour</a>
 
     <!-- Error Handling -->
@@ -13,16 +13,16 @@
         <h1>{{country.name}}</h1>
         <div class="listDiv">
           <ul>
-            <li><span>Native Name:</span> {{country.nativeName}}</li>
-            <li><span>Population:</span> {{country.population | formatNumbers }}</li>
-            <li><span>Region:</span> {{country.region}}</li>
-            <li><span>Sub Region:</span> {{country.subregion}}</li>
-            <li><span>Capital:</span> {{country.capital}}</li>
+            <li><span>Nom d'origine :</span> {{country.nativeName}}</li>
+            <li><span>Population :</span> {{country.population | formatNumbers }}</li>
+            <li><span>Continent :</span> {{country.region}}</li>
+            <li><span>Région :</span> {{country.subregion}}</li>
+            <li><span>Capitale :</span> {{country.capital}}</li>
           </ul>
           <ul>
-            <li><span>Top Level Domain:</span> {{country.topLevelDomain['0']}}</li>
-            <li><span>Currencies:</span> {{country.currencies['0'].name}}</li>
-            <li><span>Languages:</span> 
+            <li><span>Nom de domaine :</span> {{country.topLevelDomain['0']}}</li>
+            <li><span>Monnaies :</span> {{country.currencies['0'].name}}</li>
+            <li><span>Langages:</span> 
               <span 
                 v-for="(language, index) in country.languages" 
                 v-bind:key="index" 
@@ -35,9 +35,9 @@
         <div class="borders">
           <div class="bordersWrapper">
             <!-- Check if borders exist for this country, if no show text-->
-            <span class="noBorders" v-if="countryInfo['0'].borders.length === 0">No Border Countries</span>
+            <span class="noBorders" v-if="countryInfo['0'].borders.length === 0">Pas de pays limitrophe</span>
             <!-- If yes load border countries -->
-            <span class="borderTitle" v-else>Border Countries:</span>
+            <span class="borderTitle" v-else>Pays limitrophes : </span>
             <span v-for="countryBorderDetails in borderCountries" v-bind:key="countryBorderDetails.id" class="borderList">
               <router-link :to="{ name: 'country-detail', params: { country: countryBorderDetails.name }}" class="borderLinks">
                 {{countryBorderDetails.name}} 
@@ -55,7 +55,6 @@ import axios from 'axios';
 
 export default {
   name: 'country-detail',
-  props: [ 'isDarkTheme' ],
   data () {
     return {
       // API loading animation, error message, API response
@@ -98,13 +97,18 @@ export default {
 
 
 <style scoped>
+h1{
+  margin-bottom: 10px;
+}
 
 .country-detail {
-  background: #fff;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 75px;
-  font-size: 16px;
+    background: #ffffffc4;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 16px;
+    margin: 50px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 /* loading animation */
@@ -190,26 +194,28 @@ export default {
   width: 100%;
   height: 100%;
 }
-
+img.flag {
+    border: 1px solid #020e1b;
+    padding-bottom: 0 !important;
+    margin:auto;
+}
 .country-details {
-  text-align: left;
-  min-width: 400px;
-  max-width: 650px;
-  margin: 0 0 0 auto;
+  text-align: center;
   width: 100%;
-  padding-left: 40px;
+  color: #020e1b;
+  margin: 0 40px;
 }
 
 .listDiv {
   display: flex;
+  margin:0 30px;
 }
 
 .country-details ul {
   list-style: none;
-  text-align: left;
+  text-align: center;
   line-height: 32px;
   padding-left: 0;
-  margin: 0 auto 0 0;
 }
 
 .country-details ul:last-child {
@@ -226,7 +232,6 @@ li span {
 
 .borders {
   display: flex;
-  padding-top: 50px;
 }
 
 .borderTitle {
@@ -257,60 +262,35 @@ li span {
 .noBorders {
   font-weight: 600;
 }
-
-/* Dark Theme */
-.darkTheme  {
-  background-color: #202c36;
+a.backBtn, a.borderLinks {
+    background: #e4872c;
+    color: white;
+    padding:5px 15px;
 }
-
-.darkTheme .borderLinks,
-.darkTheme .backBtn {
-  background-color: #2b3845;
+a.backBtn:hover, a.borderLinks:hover {
+    background-color: #f0bb86;
 }
-
-.darkTheme h1,
-.darkTheme p,
-.darkTheme span,
-.darkTheme li,
-.darkTheme .borderLinks,
-.darkTheme .backBtn {
-  color: #fff;
-}
-
-.darkTheme .loader {
-  border: 16px solid #2b3845;
-  border-top: 16px solid #f3f3f3; 
-}
-
 
 @media (max-width: 875px) {
   .country-detail {
     padding: 25px;
   }
-
+  .country-details {
+   margin: 0;
+}
   .backBtn {
     margin-top: 22px;
   }
-
   .countryTile {
     flex-direction: column;
   }
-
   .flag {
     min-width: 325px;
     height: 100%;
-    padding-bottom: 20px;
   }
-
-  .country-details {
-    padding-left: 0;
-    min-width: 325px;
-  }
-
   .listDiv {
     flex-direction: column;
   }
-
   .country-details ul:last-child {
     margin: inherit;
     padding-top: 40px;

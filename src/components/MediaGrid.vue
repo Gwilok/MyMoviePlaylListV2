@@ -10,7 +10,7 @@
         <v-img :src="imageURL + movie.poster_path"></v-img>
         <v-img :src="imageURL + movie.profile_path"></v-img>
 
-        <!-- SOIT LE NOMBRE DE VOTE SOIT LE ROLE DE L'ARTISTE CAR SOIT L'UN SOIT L'AUTRE -->
+        <!-- SOIT LE NOMBRE DE VOTE SOIT LE ROLE DE L'ARTISTE CAR SOIT L'UN SOIT L'AUTRE EXISTE -->
         <!-- NOTE ET NOMBRE DE VOTE -->
         <v-progress-linear v-if="movie.media_type=='tv' || movie.media_type=='movie'" color="#0b488c" class="notation-horizontale" 
         :value="movie.vote_average * 10"> Noté :&nbsp;<span style="color:#e4872c">

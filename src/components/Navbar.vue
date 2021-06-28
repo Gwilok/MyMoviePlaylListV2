@@ -55,16 +55,16 @@
             text: "Séries les mieux notées",
             route: "/series-mieux-notees"
           },
+            {
+              icon: "mdi-information",
+              text: "Liste des Pays",
+              route: "/liste-des-pays"
+          },
           {
             icon: "mdi-information",
             text: "Ma Liste",
             route: "/maListe"
-          },
-          {
-            icon: "mdi-information",
-            text: "Liste des Pays",
-            route: "/liste-des-pays"
-          }
+            }
         ]
       };
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="home" :class="{ darkTheme : isDarkTheme }">
+  <div class="home">
     <!-- Top left search bar component -->
     <div class="searchBar">
       <div class="searchContainer">
@@ -8,15 +8,15 @@
           class="searchInput" 
           type="text" 
           v-model="search"
-          aria-label="Chercher pour un pays ..."
-          placeholder="Chercher pour un pays ..."
+          aria-label="Chercher un pays ..."
+          placeholder="Chercher un pays ..."
         />
         <ul class="searchResults"></ul>
       </div>
     <!-- Top right dropdown region selector -->
       <div class="dropdownDiv">
         <!-- Default text changes after selecting a region -->
-        <a class="dropdownBtn" v-if="!showAllRegion" v-on:click="showFilter = !showFilter">Filtrer par région :</a>
+        <a class="dropdownBtn" v-if="!showAllRegion" v-on:click="showFilter = !showFilter">Filtrer par continent :</a>
         <a class="dropdownBtn" v-else v-on:click="showFilter = !showFilter">
             {{ region }} 
         </a>
@@ -113,12 +113,12 @@
           :to="{ name: 'country-detail', params: {country: country.name }}" 
           class="linkTile"
         >
-          <img v-bind:src="country.flag" alt="Country Flag" class="flag">
+          <img v-bind:src="country.flag" alt="Drapeau du pays" class="flag">
           <div class="text">
-            <h1>{{ country.transalations.fr }}</h1>
+            <h1>{{ country.translations.fr }}</h1>
             <p><span>Population: </span>{{ country.population | formatNumbers }}</p>
             <p><span>Région: </span> {{ country.region }}</p>
-            <p><span>Capital: </span> {{ country.capital }}</p>
+            <p><span>Capitale: </span> {{ country.capital }}</p>
           </div>
         </router-link>
       </div>
@@ -131,8 +131,6 @@
 import axios from 'axios';
 
 export default {
-  // Theme colour changer button from props
-  props: [ 'isDarkTheme' ],
   data () {
     return {
       // API loading animation, error message, API response
@@ -147,8 +145,6 @@ export default {
       showAllRegion: false,
       // v-model data "region": Automatically updates the dropdown heading text
       region: '',
-      // Dark/Light theme button toggle
-      darkMode: false,
     }
   },
   mounted () {
@@ -334,6 +330,7 @@ input[type="radio"] {
          -o-animation: fadein 1s; /* Opera < 12.1 */
             animation: fadein 1s;
 }
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -392,35 +389,7 @@ input[type="radio"] {
   font-weight: 600;
 }
 
-/* Dark Theme */
-.darkTheme,
-.darkTheme .dropdownUL li:hover  {
-  background-color: #08315e;
-}
 
-.darkTheme .searchContainer, 
-.darkTheme .searchInput,
-.darkTheme .dropdownBtn,
-.darkTheme .dropdownUL,
-.darkTheme .countryTile {
-  background-color: #08315e;
-
-}
-
-.darkTheme h1,
-.darkTheme p,
-.darkTheme .searchIcon, 
-.darkTheme .searchInput, 
-.darkTheme ::placeholder,
-.darkTheme .dropdownBtn,
-.darkTheme .dropdownUL {
-  color: #fff;
-}
-
-.darkTheme .loader {
-  border: 16px solid #08315e;
-  border-top: 16px solid #f3f3f3; 
-}
 
 
 @media (max-width: 875px) {

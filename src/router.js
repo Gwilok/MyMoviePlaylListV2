@@ -56,7 +56,7 @@ export default new Router({
       component: CountryDetail,
       props: true,
       meta: {
-        title: 'REST API Countries App'
+        title: 'Détail du pays'
       }
     },
   ]
