@@ -1,8 +1,8 @@
 <template>
-  <v-container id="accueil">
+  <v-container id="super-heros">
     
     <!-- INFOS -->
-    <h1 class="display-3 my-3 my-5">APIWorld</h1>
+    <h1 class="display-3 my-3 my-5">Liste des Super-Héros</h1>
     <p>Ce site contient plus de <b>8820 Films</b> et <b>1880 Séries</b>!</p>
       
     <!-- CHAMP ET BOUTON RECHERCHE PAR MOT CLE -->
@@ -60,10 +60,10 @@ export default {
   },
   methods: {
     init() {
-      const key = "ad3aba60a11eb6e43170e9c6ec0d00e6";
+      const key = "1190710881379673";
       axios
-        .get("https://api.themoviedb.org/3/search/multi?api_key="
-        +key+"&language=fr-FR&query="+this.motCherche+"&page="+this.page+"&include_adult=true")
+        .get("https://superheroapi.com/api/"
+        +key+"/search/"+this.motCherche)
         .then((response) => { this.movies = response.data.results;})
         .catch((error) => { console.log(error);})
         .finally(() => {
@@ -102,8 +102,7 @@ export default {
 </script>
 
 <style scoped>
-#accueil {
+body {
   text-align: center;
 }
-
 </style>

@@ -9,6 +9,8 @@
         <!-- IMAGE D'ENTETE -->
         <v-img :src="imageURL + movie.poster_path"></v-img>
         <v-img :src="imageURL + movie.profile_path"></v-img>
+        <v-img :src="movie.image.url"></v-img>
+
 
         <!-- SOIT LE NOMBRE DE VOTE SOIT LE ROLE DE L'ARTISTE CAR SOIT L'UN SOIT L'AUTRE EXISTE -->
         <!-- NOTE ET NOMBRE DE VOTE -->
@@ -89,7 +91,7 @@
 
             </v-expansion-panel>
           </v-expansion-panels>
-          <button class="btn-add-modal"  @click="addListeFavoris(movie)">Ajout de la tâche</button>
+          <button class="btn-add-modal"  @click="addListeFavoris(movie)">Ajouter aux Favoris</button>
         </v-card-text>
 
       </v-layout>

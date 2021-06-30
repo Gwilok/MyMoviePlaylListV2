@@ -3,7 +3,7 @@
     <v-app-bar dark app flat>
       <v-app-bar-nav-icon id="drawerIcon" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase white--text">
-        <span class="font-weight-light">myMoviesReview</span>
+        <span class="font-weight-light">APIWorld</span>
       </v-toolbar-title>
     </v-app-bar>
 
@@ -59,6 +59,16 @@
               icon: "mdi-information",
               text: "Liste des Pays",
               route: "/liste-des-pays"
+          },
+          {
+            icon: "mdi-information",
+            text: "Dragon Zall Z ",
+            route: "/DragonBallZ"
+          },
+            {
+              icon: "mdi-information",
+              text: "Liste des Super-Héros",
+              route: "/SuperHeros"
           },
           {
             icon: "mdi-information",
