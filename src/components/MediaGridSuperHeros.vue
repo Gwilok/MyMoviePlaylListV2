@@ -7,10 +7,9 @@
       <v-layout column align-center fill-height class="text-center">
 
         <!-- IMAGE D'ENTETE -->
-        <v-img :src="imageURL + movie.poster_path"></v-img>
-        <v-img :src="imageURL + movie.profile_path"></v-img>
-        <!-- <v-img :src="movie.image.url"></v-img> -->
+        <v-img :src="movie.image.url"></v-img>
 
+        <v-card-text v-if="movie.biography.full-name"><b>Biographie : </b>{{movie.biography.full-name}}<hr></v-card-text>
 
         <!-- SOIT LE NOMBRE DE VOTE SOIT LE ROLE DE L'ARTISTE CAR SOIT L'UN SOIT L'AUTRE EXISTE -->
         <!-- NOTE ET NOMBRE DE VOTE -->
@@ -20,12 +19,7 @@
         </v-progress-linear>
         <!-- PRECISION, Et FRANCISATION POUR ROLE CONNU DE ARTISTE POUR UN HOMME -->
         <v-layout class="text-role-artiste" v-if="movie.gender=='2'">
-        <v-card-text v-if="movie.known_for_department=='Acting'"><b>Rôle le plus connu : </b>Acteur<hr></v-card-text>
-        <v-card-text v-else-if="movie.known_for_department=='Sound'"><b>Rôle le plus connu : </b>Ingénieur du Son<hr></v-card-text>
-        <v-card-text v-else-if="movie.known_for_department=='Production'"><b>Rôle le plus connu : </b>Producteur<hr></v-card-text>
-        <v-card-text v-else-if="movie.known_for_department=='Directing'"><b>Rôle le plus connu : </b>Directeur<hr></v-card-text>
-        <v-card-text v-else-if="movie.known_for_department=='Costume & Make-Up'"><b>Rôle le plus connu : </b>Costumes & Maquillages<hr></v-card-text>                
-        <v-card-text v-else><b>Rôle le plus connu : </b>{{movie.known_for_department}}<hr></v-card-text>
+        <v-card-text v-if="movie.biography.full-name"><b>Biographie : </b>{{movie.biography[full-name]}}<hr></v-card-text>
         </v-layout>
         <!-- PRECISION, Et FRANCISATION POUR ROLE CONNU DE ARTISTE POUR UN HOMME -->
         <v-layout class="text-role-artiste" v-if="movie.gender=='1'">

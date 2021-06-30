@@ -25,7 +25,8 @@
     <!-- AFFICHAGE DES FILMS AVEC LOADER -->
     <v-sheet v-if="motCherche" color="#0b488c5e" class="pa-3">
       <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
-      <media-grid :movies="movies" :imageURL="imageURL"></media-grid>
+        mediaGridSuperHeros 
+      <mediaGridSuperHeros :movies="movies" :imageURL="imageURL"></mediaGridSuperHeros>
     </v-sheet>
 
     <!-- PAGINATION FIN DE PAGE -->
@@ -38,13 +39,13 @@
 
 <script>
 import axios from "axios";
-import MediaGrid from "../components/MediaGrid.vue";
 import MediaNav from "../components/MediaNav.vue";
+import MediaGridSuperHeros from "../components/MediaGridSuperHeros.vue";
 
 export default {
   components: {
-    mediaGrid: MediaGrid,
     mediaNav: MediaNav,
+    mediaGridSuperHeros: MediaGridSuperHeros,
   },
   data: function () {
     return {
