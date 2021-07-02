@@ -52,11 +52,11 @@ export default new Router({
       name: 'listePays',
       component: ListePays
     },
-    {
-      path: '/dragon-ball-z',
-      name: 'DragonBallZ',
-      component: DragonBallZ
-    },
+    // {
+    //   path: '/dragon-ball-z',
+    //   name: 'DragonBallZ',
+    //   component: DragonBallZ
+    // },
     {
       path: '/SuperHeros',
       name: 'SuperHeros',

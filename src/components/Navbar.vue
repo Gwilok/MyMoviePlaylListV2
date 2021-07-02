@@ -56,22 +56,22 @@
             route: "/series-mieux-notees"
           },
             {
-              icon: "mdi-information",
+              icon: "mdi-map-marker-alert",
               text: "Liste des Pays",
               route: "/liste-des-pays"
           },
-          {
-            icon: "mdi-information",
-            text: "Dragon Zall Z ",
-            route: "/DragonBallZ"
-          },
+          // {
+          //   icon: "mdi-information",
+          //   text: "Dragon Zall Z ",
+          //   route: "/DragonBallZ"
+          // },
             {
-              icon: "mdi-information",
+              icon: "mdi-account-supervisor-circle",
               text: "Liste des Super-Héros",
               route: "/SuperHeros"
           },
           {
-            icon: "mdi-information",
+            icon: "mdi-charity",
             text: "Ma Liste",
             route: "/maListe"
             }
@@ -82,4 +82,10 @@
 </script>
 
 <style scoped>
+span.font-weight-light {
+    padding: 25px;
+}
+button#drawerIcon{
+  border-radius: 25%;;
+}
 </style>
