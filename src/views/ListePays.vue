@@ -111,14 +111,10 @@
       <div v-for="country in filteredCountries" class="countryTile" v-bind:key="country.id">
         <router-link 
           :to="{ name: 'country-detail', params: {country: country.name }}" 
-          class="linkTile"
-        >
+          class="linkTile">
           <img v-bind:src="country.flag" alt="Drapeau du pays" class="flag">
           <div class="text">
             <h1>{{ country.translations.fr }}</h1>
-            <p><span>Population: </span>{{ country.population | formatNumbers }}</p>
-            <p><span>Région: </span> {{ country.region }}</p>
-            <p><span>Capitale: </span> {{ country.capital }}</p>
           </div>
         </router-link>
       </div>
@@ -238,7 +234,6 @@ export default {
   padding-left: 30px;
   border-radius: 3px;
   cursor: pointer;
-  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -321,7 +316,7 @@ input[type="radio"] {
   border-radius: 3px;
   cursor: pointer;
   text-align: left;
-  margin: 0 25px 80px;
+  margin: 0 5px 40px;
   text-decoration: none;
   color: inherit;
   -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
@@ -357,7 +352,7 @@ input[type="radio"] {
 .linkTile {
   display: inline-block;
   width: 300px;
-  height: 365px;
+  height: auto;
   text-decoration: none;
   color: inherit;
 }

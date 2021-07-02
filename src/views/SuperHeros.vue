@@ -2,38 +2,24 @@
   <v-container id="super-heros">
     
     <!-- INFOS -->
-    <h1 class="display-3 my-3 my-5">Liste des Super-Héros</h1>
-    <p>Ce site contient plus de <b>8820 Films</b> et <b>1880 Séries</b>!</p>
+    <h1 class="display-1 font-weight-light">Liste des Super-Héros</h1>
       
     <!-- CHAMP ET BOUTON RECHERCHE PAR MOT CLE -->
-    <v-text-field style="width:30%; margin:auto;" hint="Merci de confirmer votre recherche." filled v-model="motCherche" color="#e4872c"
-      label="Chercher" placeholder="Film, Series, Artistes ..." outlined></v-text-field>
-    <v-btn small color="#e4872c" class=" mx-3 mt-3" @click=" init()">
+    <v-text-field style="width:40%; margin:10px auto;" hint="Merci de confirmer votre recherche." filled v-model="motCherche" color="#e4872c"
+      label="Chercher" placeholder="Super-héros, Super-méchants ..."  outlined></v-text-field>
+    <v-btn small color="#e4872c" class=" mx-3 mt-3" style="width:30%; margin:auto;" @click=" init()">
       <div class="caption">CONFIRMER LA RECHERCHE</div>
     </v-btn>
 
-    <!-- BOUTONS TYPE DE TRI DES FILMS -->
-    <media-nav  v-if="motCherche" :pageTitle="pageTitle" :sortCriteria="sortCriteria"
-     @popularity="sortBy('popularity')" @vote_average="sortBy('vote_average')"
-     @release_date="sortBy('release_date')" @vote_count="sortBy('vote_count')"></media-nav>
-
-    <!-- PAGINATION DEBUT DE PAGE -->
-    <div v-if="motCherche" class="text-center"><!-- anciennement v-if showPagination -->
-      <v-pagination color="#e4872c" v-model="page" :length="20" :value="page"></v-pagination>
-    </div>
-
     <!-- AFFICHAGE DES FILMS AVEC LOADER -->
-    <v-sheet v-if="motCherche" color="#0b488c5e" class="pa-3">
-      <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader>
-        mediaGridSuperHeros 
-      <mediaGridSuperHeros :movies="movies" :imageURL="imageURL"></mediaGridSuperHeros>
-    </v-sheet>
+    <!-- <v-sheet v-if="motCherche" color="#0b488c5e" class="pa-3">
+      <v-skeleton-loader class="mx-auto" max-width="300" type="card"></v-skeleton-loader> -->
+      <mediaGridSuperHeros :movies="movies"></mediaGridSuperHeros>
+    <!-- </v-sheet> -->
 
-    <!-- PAGINATION FIN DE PAGE -->
-    <div v-if="motCherche" class="text-center"><!-- anciennement v-if showPagination -->
-      <v-pagination color="#e4872c" v-model="page" :length="20" :value="page"></v-pagination>
-    </div>
-   
+        <!-- Loading API response -->
+    <div class="loaderFlex"><div v-if="pending" class="loader"></div></div>
+ 
   </v-container>
 </template>
 
@@ -49,12 +35,10 @@ export default {
   },
   data: function () {
     return {
+      // API loading animation, error message, API response
+      pending: false,
       movies: [],
       pageTitle: "Rechercher par mot-clé :",
-      imageURL: "https://image.tmdb.org/t/p/original",
-      sortCriteria: "Triés par : les plus populaires",
-      sortedBy: "popularity",
-      page: 1,
       showPagination: false,
       motCherche:"",
     };
@@ -62,34 +46,15 @@ export default {
   methods: {
     init() {
       const key = "1190710881379673";
+      // API request using axios to restcountries.eu
+      this.pending = true;
       axios
         .get("https://superheroapi.com/api/"
         +key+"/search/"+this.motCherche)
         .then((response) => { this.movies = response.data.results;})
         .catch((error) => { console.log(error);})
-        .finally(() => {
-          this.sortBy(this.sortedBy);
-          this.showPagination = true;
-        });
-    },
-    sortBy(prop) {
-            if (prop === "popularity") {
-        this.sortCriteria = "Triés par : les plus populaires";
-      } else if (prop === "vote_average") {
-        this.sortCriteria = "Triés par : les mieux notés";
-      } else if (prop === "release_date") {
-        this.sortCriteria = "Triés par : sorties les plus récentes";
-      } else if (prop === "vote_count") {
-        this.sortCriteria = "Triés par : le plus grand nombre de vote";
-      }
-      this.sortedBy = prop;
-      this.movies.sort((a, b) => (a[prop] > b[prop] ? -1 : 1));
-    },
-  },
-  watch: {
-    page: function (page) {
-      this.init();
-    },
+        .finally( () => { this.pending = false });
+    }
   },
   mounted() {
     this.init();
@@ -105,5 +70,23 @@ export default {
 <style scoped>
 body {
   text-align: center;
+}
+/* loading animation */
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #2b3845; 
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 100px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.loaderFlex {
+  display: flex;
+  justify-content: center;
 }
 </style>

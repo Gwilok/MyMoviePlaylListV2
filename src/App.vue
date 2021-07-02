@@ -65,6 +65,9 @@ h2 {
   padding:10px 0 5px 0;
   font-size:30px;
 }
+.container {
+ text-align: center;
+}
 .theme--dark.v-app-bar.v-toolbar.v-sheet {
     background-color: #0b488c;
 }
